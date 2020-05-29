@@ -1,5 +1,7 @@
-# pytorch-neural-style-transfer
-Command line application to run a neural-style transfer using PyTorch
+# PyTorch Neural Style Transfer
+Command line application to run a neural-style transfer using PyTorch based on this [PyTorch tutorial](https://pytorch.org/tutorials/advanced/neural_style_tutorial.html). 
+
+Content and Style images must be the same size. I have been resizing to 512x512. If you do not have a compatible GPU, the images will be automatically resized to 128x128.
 
 ```python
 python main.py --help
@@ -28,3 +30,7 @@ Options:
 ### Other Example:
 ![Image of Muted Picasso Booty](https://github.com/tomsitter/pytorch-neural-style-transfer/blob/master/output/bootsy_final.jpg)
   
+### To Do:
+* Add more command-line options  (e.g. which conv layers to use)
+* Experiment with a ResNet-50 instead of VGG-19
+* Package with setuptools
