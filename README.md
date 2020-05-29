@@ -11,7 +11,7 @@ Run `pip install`
 
 ### Usage
 
-```python
+```
 Usage: pytorch-nst [OPTIONS]
 
 Options:
