@@ -5,7 +5,7 @@ import torch.optim as optim
 
 import copy
 
-from config import device, content_layers_default, style_layers_default
+from pytorch_nst.config import device, content_layers_default, style_layers_default
 
 class ContentLoss(nn.Module):
     def __init__(self, target,):

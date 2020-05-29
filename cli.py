@@ -9,9 +9,9 @@ import matplotlib.pyplot as plt
 
 import torchvision.models as models
 
-from config import device, cnn_normalization_mean, cnn_normalization_std
-from util import image_loader, imshow, random_img, save_image, show_all_images
-from nst import run_style_transfer
+from pytorch_nst.config import device, cnn_normalization_mean, cnn_normalization_std
+from pytorch_nst.util import image_loader, imshow, random_img, save_image, show_all_images
+from pytorch_nst.nst import run_style_transfer
 
 @click.command()
 @click.option('-c', '--content', 
@@ -30,7 +30,7 @@ from nst import run_style_transfer
 @click.option('--steps', default=300, prompt=False, show_default=True)
 @click.option('--random_input', is_flag=True,
                 help='Will start with random noise if set, otherwise content image')
-def run(content, style, output, style_weight, steps, random_input):
+def cli(content, style, output, style_weight, steps, random_input):
     style_img = image_loader(style)
     content_img = image_loader(content)
     if random_input:
@@ -70,9 +70,4 @@ def restart_program():
 
     python = sys.executable
     os.execl(python, python, *sys.argv)
-
-
-if __name__ == '__main__':
-    run()
-
 

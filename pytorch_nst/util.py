@@ -5,7 +5,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
 
-from config import device, imsize
+from pytorch_nst.config import device, imsize
 
 loader = transforms.Compose([
     transforms.Resize(imsize),
