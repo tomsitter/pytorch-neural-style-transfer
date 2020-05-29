@@ -25,15 +25,18 @@ def validate_layers(ctx, param, value):
 @click.option('-c', '--content', 
                 default='./examples/content.jpg', 
                 prompt='Content image',
-                help='path to content image')
+                help='path to content image',
+                show_default=True)
 @click.option('-s', '--style', 
                 default='./examples/style.jpg', 
                 prompt='Style image',
-                help='path to style image')
+                help='path to style image',
+                show_default=True)
 @click.option('-o', '--output', 
                 default='./output/generated-' +  str(int(time())) + '.jpg', 
                 prompt=False,
-                help='path to save generated image')
+                help='path to save generated image',
+                show_default=True)
 @click.option('--style_weight', default=1000000, prompt=False, show_default=True)
 @click.option('--style_layers', callback=validate_layers, 
                 default='1,2,3,4,5', show_default=True,
