@@ -3,16 +3,25 @@ Command line application to run a neural-style transfer using PyTorch based on t
 
 Content and Style images must be the same size. I have been resizing to 512x512. If you do not have a compatible GPU, the images will be automatically resized to 128x128.
 
-```python
-python main.py --help
+### Install
 
-Usage: main.py [OPTIONS]
+Download or clone this repository
+
+Run `pip install`
+
+### Usage
+
+```python
+Usage: pytorch-nst [OPTIONS]
 
 Options:
   -c, --content TEXT      path to content image
   -s, --style TEXT        path to style image
   -o, --output TEXT       path to save generated image
   --style_weight INTEGER  [default: 1000000]
+  --style_layers TEXT     Conv Layers to use for style loss  [default:
+                          1,2,3,4,5]
+
   --steps INTEGER         [default: 300]
   --random_input          Will start with random noise if set, otherwise
                           content image
