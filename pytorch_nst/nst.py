@@ -40,8 +40,8 @@ class Normalization(nn.Module):
     def __init__(self, mean, std):
         super(Normalization, self).__init__()
         
-        self.mean = torch.tensor(mean).view(-1, 1, 1)
-        self.std = torch.tensor(std).view(-1, 1, 1)
+        self.mean = mean.clone().view(-1, 1, 1)
+        self.std = std.clone().view(-1, 1, 1)
 
     def forward(self, img):
         #normalize image
@@ -107,11 +107,17 @@ def get_input_optimizer(input_img):
 def run_style_transfer(cnn, 
                        normalization_mean, normalization_std,
                        content_img, style_img, input_img, 
-                       num_steps=300, style_weight=1000000, content_weight=1):
+                       num_steps=300, 
+                       style_layers=None, style_weight=1000000, content_weight=1):
+
+    if not style_layers:
+        style_layers = style_layers_default
+
     print("Building the stlye transfer model..")
     model, style_losses, content_losses = get_style_model_and_losses(cnn,
                 normalization_mean, normalization_std, 
-                style_img, content_img)
+                style_img, content_img, 
+                style_layers=style_layers)
     optimizer = get_input_optimizer(input_img)
 
     print("Optimizing...")
