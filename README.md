@@ -12,15 +12,16 @@ Run `pip install`
 ### Usage
 
 ```python
-Usage: pytorch-nst [OPTIONS]
+UUsage: pytorch-nst [OPTIONS]
 
 Options:
-  -c, --content TEXT      path to content image
-  -s, --style TEXT        path to style image
-  -o, --output TEXT       path to save generated image
+  -c, --content TEXT      path to content image  [default: ./examples/content.jpg]
+
+  -s, --style TEXT        path to style image  [default: ./examples/style.jpg]
+  -o, --output TEXT       path to save generated image  [default: ./output/generated-1590787599.jpg]
+
   --style_weight INTEGER  [default: 1000000]
-  --style_layers TEXT     Conv Layers to use for style loss  [default:
-                          1,2,3,4,5]
+  --style_layers TEXT     Conv Layers to use for style loss  [default: 1,2,3,4,5]
 
   --steps INTEGER         [default: 300]
   --random_input          Will start with random noise if set, otherwise
