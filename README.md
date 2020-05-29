@@ -1,5 +1,5 @@
 # PyTorch Neural Style Transfer
-Command line application to run a neural-style transfer using PyTorch based on this [PyTorch tutorial](https://pytorch.org/tutorials/advanced/neural_style_tutorial.html). 
+Command line application to run a neural style transfer using PyTorch based on this [PyTorch tutorial](https://pytorch.org/tutorials/advanced/neural_style_tutorial.html). 
 
 Content and Style images must be the same size. I have been resizing to 512x512. If you do not have a compatible GPU, the images will be automatically resized to 128x128.
 
@@ -12,7 +12,7 @@ Run `pip install`
 ### Usage
 
 ```python
-UUsage: pytorch-nst [OPTIONS]
+Usage: pytorch-nst [OPTIONS]
 
 Options:
   -c, --content TEXT      path to content image  [default: ./examples/content.jpg]
