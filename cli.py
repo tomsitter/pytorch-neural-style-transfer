@@ -71,3 +71,5 @@ def cli(content, style, output, style_weight, style_layers, steps, random_input)
         save_image(gen_img, output)
         print(f'Saved to {output}')
 
+if __name__ == '__main__':
+    cli()
