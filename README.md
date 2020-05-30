@@ -5,14 +5,18 @@ Content and Style images must be the same size. I have been resizing to 512x512.
 
 ### Install
 
+Install python3-tk for image visualization
+
 Download or clone this repository
 
-Run `pip install`
+Recommended: Create a virtualenv and activate it
+
+Run `pip install requirements.txt`
 
 ### Usage
 
 ```
-Usage: pytorch-nst [OPTIONS]
+Usage: python main.py [OPTIONS]
 
 Options:
   -c, --content TEXT      path to content image  [default: ./examples/content.jpg]
@@ -32,7 +36,7 @@ Options:
 
 ### Example:
   
-`pytorch-nst --content='./examples/bootsy.jpg' --style='./examples/picasso.jpg' --style_weight=500000 --steps=3000 --random_input`
+`python main.py --content='./examples/bootsy.jpg' --style='./examples/picasso.jpg' --style_weight=500000 --steps=3000 --random_input`
 
 ![Image of Picasso Bootsy](https://github.com/tomsitter/pytorch-neural-style-transfer/blob/master/output/bootsy_picasso_3000_steps.png)
   
