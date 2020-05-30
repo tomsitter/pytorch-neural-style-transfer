@@ -32,7 +32,7 @@ Options:
 
 ### Example:
   
-`python main.py --content='./examples/bootsy.jpg' --style='./examples/picasso.jpg' --style_weight=500000 --steps=3000 --random_input`
+`pytorch-nst --content='./examples/bootsy.jpg' --style='./examples/picasso.jpg' --style_weight=500000 --steps=3000 --random_input`
 
 ![Image of Picasso Bootsy](https://github.com/tomsitter/pytorch-neural-style-transfer/blob/master/output/bootsy_picasso_3000_steps.png)
   
