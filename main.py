@@ -57,7 +57,9 @@ def cli(content, style, output, style_weight, style_layers, steps, random_input)
 
     # Load a pre-trained VGG network
     print("Loading pre-trained VGG19. This may take a while the first run...")
+    
     cnn = models.vgg19(pretrained=True).features.to(device).eval()
+    #cnn = models.resnet50(pretrained=True).to(device).eval()
 
     gen_img = run_style_transfer(cnn, 
                     cnn_normalization_mean, cnn_normalization_mean, 
@@ -71,3 +73,5 @@ def cli(content, style, output, style_weight, style_layers, steps, random_input)
         save_image(gen_img, output)
         print(f'Saved to {output}')
 
+if __name__ == '__main__':
+    cli()
