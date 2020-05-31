@@ -1,12 +1,6 @@
-import os
-import sys
-import psutil
-import logging
 from time import time
 
 import click
-import matplotlib.pyplot as plt
-
 import torchvision.models as models
 
 from pytorch_nst.config import device, cnn_normalization_mean, cnn_normalization_std

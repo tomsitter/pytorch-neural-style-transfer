@@ -8,6 +8,7 @@ import copy
 from pytorch_nst.config import device, content_layers_default, style_layers_default
 
 class ContentLoss(nn.Module):
+    ''' Calculate mse loss between two feature maps from the same layer'''
     def __init__(self, target,):
         super(ContentLoss, self).__init__()
         # must detach target from the tree so that
@@ -15,18 +16,24 @@ class ContentLoss(nn.Module):
         self.target = target.detach()
 
     def forward(self, input):
+        # Calculate mse loss and return the input. 
+        # Since we return the layer unaltered, this layer has no actual impact on subsequent layers'''
         self.loss = F.mse_loss(input, self.target)
         return input
 
 def gram_matrix(input):
-    batch_size, num_features, c, d = input.size()
-    #c and d are dimensions of a f. map (N=c*d)
-    features = input.view(batch_size*num_features, c*d)
+    ''' A gram matrix will calculate the relation between the filter activated caused by an image.
+        Multiple filters being activated together by in image can be thought of as it's stlye
+    '''
+    batch_size, num_features, height, width = input.size()
+    features = input.view(batch_size*num_features, height*width)
     G = torch.mm(features, features.t()) # gram product
-    # normalize by dividing by number of elements
-    return G.div(batch_size*num_features*c*d)
+    # normalize by dividing by number of elements. 
+    # This is needed so that layers with different dimensions have the same weight
+    return G.div(batch_size*num_features*height*width)
 
 class StyleLoss(nn.Module):
+    ''' Calculate mse loss of the gram matrix of the two feature maps from the same layer'''
     def __init__(self, target_feature):
         super(StyleLoss, self).__init__()
         self.target = gram_matrix(target_feature).detach()
@@ -37,6 +44,9 @@ class StyleLoss(nn.Module):
         return input
 
 class Normalization(nn.Module):
+    ''' The VGG19 network was pre-trained with normalized images, so we will apply the same normalization
+        to images fed into this application
+    '''
     def __init__(self, mean, std):
         super(Normalization, self).__init__()
         
@@ -52,6 +62,11 @@ def get_style_model_and_losses(cnn,
                            style_img, content_img, 
                            content_layers=content_layers_default,
                            style_layers=style_layers_default):
+    '''
+    We're going to build a model where we insert our content/style layers into the pre-trained cnn
+    These layers are "transparent", as they pass along the input unaltered, but have their own custom
+    loss functions that our optimizer will use on the generated image.
+    '''
     cnn = copy.deepcopy(cnn)
 
     normalization = Normalization(normalization_mean, 
@@ -91,7 +106,7 @@ def get_style_model_and_losses(cnn,
             model.add_module(f'style_loss_{i}', style_loss)
             style_losses.append(style_loss)
 
-    # trim layers after the last content/style losses
+    # trim layers after the last content/style loss layer, since we don't need them
     for i in range(len(model) -1, -1, -1):
         if isinstance(model[i], ContentLoss) or isinstance(model[i], StyleLoss):
             break
@@ -113,7 +128,7 @@ def run_style_transfer(cnn,
     if not style_layers:
         style_layers = style_layers_default
 
-    print("Building the stlye transfer model..")
+    print("Building the style transfer model..")
     model, style_losses, content_losses = get_style_model_and_losses(cnn,
                 normalization_mean, normalization_std, 
                 style_img, content_img, 
@@ -125,8 +140,10 @@ def run_style_transfer(cnn,
     while run[0] <= num_steps:
 
         def closure():
+            # clip pixel values to between 0 and 1
             input_img.data.clamp_(0,1)
 
+            # Run a step forward, calculate loss of our content/style layers
             optimizer.zero_grad()
             model(input_img)
             style_score=0
@@ -154,6 +171,7 @@ def run_style_transfer(cnn,
         
         optimizer.step(closure)
 
+    # clip pixel values to between 0 and 1
     input_img.data.clamp_(0, 1)
 
     return input_img
