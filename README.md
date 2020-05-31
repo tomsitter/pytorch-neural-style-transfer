@@ -36,15 +36,10 @@ Options:
 
 ### Example:
   
-`python main.py --content='./examples/bootsy.jpg' --style='./examples/picasso.jpg' --style_weight=500000 --steps=3000 --random_input`
+`python main.py --content='./examples/bootsy.jpg' --style='./examples/picasso.jpg' --style_weight=500000 --steps=750 --random_input`
 
-![Image of Picasso Bootsy](https://github.com/tomsitter/pytorch-neural-style-transfer/blob/master/output/bootsy_picasso_3000_steps.png)
+![Image of Picasso Bootsy](https://github.com/tomsitter/pytorch-neural-style-transfer/blob/master/output/bootsy.png)
   
   
-### Other Example:
+### Another Example:
 ![Image of Muted Picasso Booty](https://github.com/tomsitter/pytorch-neural-style-transfer/blob/master/output/bootsy_final.jpg)
-  
-### To Do:
-* Add more command-line options  (e.g. which conv layers to use)
-* Experiment with a ResNet-50 instead of VGG-19
-* Package with setuptools

@@ -43,10 +43,12 @@ def show_all_images(content, style, generated, title=None):
     c_ax = fig.add_subplot(grid[-1,0])
     c_ax.axis('off')
     c_ax.imshow(c_image)
+    c_ax.title.set_text("Content Image")
 
     s_ax = fig.add_subplot(grid[-1,1])
     s_ax.axis('off')
     s_ax.imshow(s_image)
+    s_ax.title.set_text("Style Image")
     
     g_ax = fig.add_subplot(grid[0:2, :])
     g_ax.axis('off')
