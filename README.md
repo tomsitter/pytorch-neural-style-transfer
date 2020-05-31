@@ -5,13 +5,13 @@ Content and Style images must be the same size. I have been resizing to 512x512.
 
 ### Install
 
-Install python3-tk for image visualization
+On Linux, you may need to install python3-tk for image visualization
 
 Download or clone this repository
 
 Recommended: Create a virtualenv and activate it
 
-Run `pip install requirements.txt`
+Run `pip install -r requirements.txt`
 
 ### Usage
 
